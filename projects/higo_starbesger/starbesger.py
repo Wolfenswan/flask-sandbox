@@ -1,0 +1,85 @@
+'''
+Staatsarchiv Bestellschein Generator (StArBesGer)
+
+ÜBER
+Um Archivgut des Staatsarchivs der Stadt Hamburg zu bestellen, müssen Nutzer für jeden Artikel einen Bestellschein in doppelter Ausführung anfertigen. Eine Möglichkeit, mehrere Bestellscheine auf einmal anzufertigen, besteht nicht. Dieses Script vereinfacht diesen Vorgang: Es erlaubt Nutzern alle benötigten Artikel (entweder deren Signatur oder Link zum Rechercheportal des Archivs) in einer einzelnen CSV Tabelle einzutragen und extrahiert dann die benötigten Daten in PDF-Dokumente für jede Bestellung.
+
+ABOUT (EN)
+Requesting material from the Staatsarchiv in Hamburg requires the user to fill out a PDF form or excel sheet for each individual item, including a copy.
+
+This script replaces this procedure with a single csv-table where the user only has to fill in name, date and the relevant IDs. The script can also retrieve the ID from the archive's search system, if a URL is provided.
+'''
+import os
+from zipfile import ZipFile
+
+import pdfrw
+import requests
+import bs4
+from projects.higo_starbesger.constants import Constants
+
+def parse_urls(url_data):
+	''' Retrieve the signature from the search query '''
+	signaturen = []
+	for id in url_data:
+		url = f'{Constants.QUERY_URL}{id}'
+		page = requests.get(url)
+		soup = bs4.BeautifulSoup(page.text, 'html.parser')
+		signatur = soup.find("table", id="ctl00_cphMainArea_tblDetails").tr.contents[
+			2].getText()  # akward navigation as the tds wrapping the data we want dont have ids
+		signaturen.append(signatur)
+	return signaturen
+
+def parse_signatures(sig_data):
+	'''
+	Creates a list of two-value-tuples, representing the Bestandsnummer and the actual Signature. They need to be split,
+	as the order form requires them to be written into separate fields.
+	'''
+	structured_sig = []
+	for sig in sig_data:
+		id1, id2 = sig.split('_',1)
+		structured_sig.append((id1,id2),)
+	return structured_sig
+
+def write_order_pdf(output_folder, data):
+	'''
+	Creates a copy of the provided template pdf, filling in all form fields with the data
+	Credits to https://bostata.com/how-to-populate-fillable-pdfs-with-python/
+	'''
+
+	template_pdf = pdfrw.PdfReader(Constants.TEMPLATE_PDF)
+	pdf_name = f'Bestellschein {data[Constants.NAME_KEY]} {data[Constants.DATE_KEY]} {data[Constants.ID1_KEY]}_{data[Constants.ID2_KEY]}'
+	new_pdf_path = output_folder / f'{pdf_name}.pdf'
+
+	annot_key = '/Annots'
+	annot_field_Key = '/T'
+	# annot_val_keY = '/V'
+	# annot_rect_key = '/Rect'
+	subtype_key = '/Subtype'
+	widget_subtype_key = '/Widget'
+
+	annotations = [annotation for annotation in template_pdf.pages[0][annot_key] if
+				   annotation[subtype_key] == widget_subtype_key and annotation[annot_field_Key]]
+	for a in annotations:
+		key = a[annot_field_Key][1:-1]
+		if key in data.keys():
+			a.update(pdfrw.PdfDict(V=data[key]))
+
+	pdfrw.PdfWriter().write(new_pdf_path, template_pdf)
+	return pdf_name
+
+def process_form_data(form):
+	name = form.name.data
+	datum = form.datum.data.strftime('%d.%m.%Y')
+	sig_data = form.signaturen.data.split('\r\n') if form.signaturen.data != "" else [] # if/else to avoid a list containing only [""]
+	url_data = form.urls.data.split('\r\n') if form.urls.data != "" else []
+
+	return name,datum,sig_data,url_data
+
+def create_zip(zip_path, folder):
+	with ZipFile(zip_path, 'w') as zip_file:
+		for folderName, subfolders, filenames in os.walk(folder):
+			for filename in filenames:
+				if "pdf" in filename:
+					file_path = folder / filename
+					zip_file.write(file_path, filename)
+	return

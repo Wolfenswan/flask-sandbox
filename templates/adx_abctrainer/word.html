@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+    AUDAX - ABC Trainings Generator
+{% endblock %}
+
+{% block content_nonresponsive %}
+    {% for tag in word %}
+        {{ tag }}
+    {% endfor %}
+    <div>
+    Alle Übungen so schnell wie möglich abarbeiten. Pausen nur wenn nötig einlegen.<br/>
+    Präsentiert von heartbrands.eu und audax.hamburg.
+    </div>
+{% endblock %}
