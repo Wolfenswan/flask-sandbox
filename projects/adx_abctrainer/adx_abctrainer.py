@@ -1,4 +1,6 @@
-# future: https://github.com/drj11/pypng
+# future:
+# https://pypi.org/project/xhtml2pdf/ OR https://pypi.org/project/imgkit/
+# https://stackoverflow.com/questions/24612366/delete-an-uploaded-file-after-downloading-it-from-flask
 
 from markupsafe import Markup
 

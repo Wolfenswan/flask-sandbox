@@ -1,8 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-Auf der Suche nach etwas? Looking for something?<br/>
-<a href="https://github.com/Wolfenswan/">Github</a><br/>
-ma.bassermann [a] gmail.com<br/>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content_1 %}
+    <div class="col-md">
+        <h3>Auf der Suche nach etwas? Looking for something?</h3>
+        <div>Markus Bassermann : Geschichtswissenschaften | Python | Krav Maga & SDS</div>
+        <br/>
+        <h3>Zum Beispiel | For example</h3>
+        <ul><li><a href="{{url_for ('higo_starbgesger.higo_starbesger_form') }}">Bestellschein Generator</a> für das Staatsarchiv Hamburg</li>
+        <li><a href="{{url_for ('adx_abctrainer.abctrainer_form') }}">ABC Trainer</a> für Audax-SV</li></ul>
+        <h3>Ältere Dinge | Older things</h3>
+        <ul>
+        <li><a target="_blank" href="https://geschichten.github.io/bille/">Bille Geschichten</a> - Helped with Scripting)</li>
+        <li><a href="https://github.com/ferstaberinde/F3">F3 Framework for ARMA3</a> - venerable but superseded by now; co-produced & contributed under the moniker 'Wolfenswan' </li>
+        </ul>
+        <h3>Ansonsten | Otherwise</h3>
+        <a href="https://github.com/Wolfenswan/">Github</a> | ma.bassermann[ä]gmail.com<br/>
+    </div>
+{% endblock %}
+{% block content_2 %}
+
+{% endblock %}

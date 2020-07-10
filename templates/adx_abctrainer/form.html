@@ -1,28 +1,37 @@
 {% extends "base.html" %}
-
 {% block title %}
     AUDAX - ABC Trainings Generator
 {% endblock %}
 
+{% block custom_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='adx_abctrainer/abc_trainer.css') }}">
+{% endblock %}
+
 {% block content_1 %}
-    <h1>AUDAX - ABC Trainings Generator</h1>
-    <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <div class="form-group">
-                {{ form.word.label }}<br>
-                {{ form.word(size=12) }}
-                {% for error in form.word.errors %}
-                    <div class=".alert-danger">[{{ error }}]</div>
-                {% endfor %}
-            </div>
-            <p>{{ form.submit() }}</p>
-    </form>
+    <div class="col-7">
+        <h1>AUDAX - ABC Trainings Generator</h1>
+        <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.word.label(class='h6') }}<br>
+                        {{ form.word(size=12,class='form-control') }}
+                        {% for error in form.word.errors %}
+                            <div class=".alert-danger">[{{ error }}]</div>
+                        {% endfor %}
+                    </div>
+                    <p>{{ form.submit(class='btn btn-primary') }}</p>
+        </form>
+    </div>
 {% endblock %}
 
 {% block content_2 %}
-    <h1>Empfohlen vom Cheftrainer</h1>
-    <ul>
-    <li><a href="/adx_abctrainer/muskelkatzen">MUSKELKATZEN</a></li>
-    <li><a href="/adx_abctrainer/ruhrstrasse">RUHRSTRASSE</a></li>
-    </ul>
+    <div class="col-7">
+        <h3>Vom Cheftrainer Empfohlen</h3>
+        <div class="list-group list-group-horizontal">
+        <a href="{{url_for('adx_abctrainer.abctrainer_word',word='corona')}}" class='list-group-item list-group-item-action'>CORONA</a>
+        <a href="{{url_for('adx_abctrainer.abctrainer_word',word='muskelkatzen')}}" class='list-group-item list-group-item-action'>MUSKELKATZEN</a>
+        <a href="{{url_for('adx_abctrainer.abctrainer_word',word='ruhrstrasse')}}" class='list-group-item list-group-item-action'>RUHRSTRASSE</a>
+        <a href="{{url_for('adx_abctrainer.abctrainer_word',word='boxhandschuhe')}}" class='list-group-item list-group-item-action'>BOXHANDSCHUHE</a>
+        </div>
+    </div>
 {% endblock %}
