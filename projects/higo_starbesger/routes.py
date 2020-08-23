@@ -2,7 +2,7 @@ import os
 import shutil
 import sys
 
-from flask import flash, send_from_directory, Flask, send_file, request
+from flask import flash, send_from_directory, Flask, send_file, request, Response
 from markupsafe import Markup
 
 from projects.higo_starbesger.starbesger import parse_signatures, parse_urls, write_order_pdf, process_form_data, \
@@ -61,5 +61,6 @@ def download_file(folder,zip):
         stream_data = stream_zip(zip_path)
         if cleanup == 'True': # cleanup does not work with legacy method
             shutil.rmtree(folder_path)
-        return send_file(stream_data, mimetype='application/zip', as_attachment=True, attachment_filename=zip)
+        return Response(stream_data, mimetype='application/zip', direct_passthrough=True) # required workaround as per https://help.pythonanywhere.com/pages/FlaskSendFileBytesIO/
+        #return send_file(stream_data, mimetype='application/zip', as_attachment=True, attachment_filename=zip)
 
