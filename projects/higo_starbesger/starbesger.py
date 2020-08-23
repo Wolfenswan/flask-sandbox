@@ -10,6 +10,7 @@ Requesting material from the Staatsarchiv in Hamburg requires the user to fill o
 This script replaces this procedure with a single csv-table where the user only has to fill in name, date and the relevant IDs. The script can also retrieve the ID from the archive's search system, if a URL is provided.
 '''
 import os
+import io
 from zipfile import ZipFile
 
 import pdfrw
@@ -83,3 +84,11 @@ def create_zip(zip_path, folder):
 					file_path = folder / filename
 					zip_file.write(file_path, filename)
 	return
+
+def stream_zip(zip_path):
+	data = io.BytesIO()
+	with open(zip_path, 'rb') as fo:
+		data.write(fo.read())
+	data.seek(0)
+
+	return data

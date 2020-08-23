@@ -30,7 +30,9 @@ class InputForm(FlaskForm):
     datum = DateField('Datum', validators=[DataRequired(message='Bitte Datum auswählen')])
     signaturen = TextAreaField('Signaturen',[signaturen_validation()])
     urls = TextAreaField('URLs',[url_validation()])
-    zip_file = BooleanField('ZIP',description='ZIP-Datei erstellen', default="checked")
+    #zip_file = BooleanField('ZIP',description='ZIP-Datei erstellen', default="checked")
+    delete_after_dl = BooleanField('delete_after_dl',description='Dateien nach Download löschen', default="checked")
+    legacy_dl = BooleanField('legacy_dl',description='Alte Download-Methode verwenden (nur verwenden falls Fehler auftreten)')
     submit = SubmitField('Verarbeiten')
 
     def validate(self):

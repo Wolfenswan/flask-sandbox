@@ -1,7 +1,12 @@
-from flask import flash, send_from_directory, Flask
+import os
+import shutil
+import sys
+
+from flask import flash, send_from_directory, Flask, send_file, request
 from markupsafe import Markup
 
-from projects.higo_starbesger.starbesger import parse_signatures, parse_urls, write_order_pdf, process_form_data, create_zip
+from projects.higo_starbesger.starbesger import parse_signatures, parse_urls, write_order_pdf, process_form_data, \
+    create_zip, stream_zip
 from projects.higo_starbesger.forms import InputForm
 from projects.higo_starbesger.constants import Constants
 from pathlib import Path
@@ -20,6 +25,9 @@ def higo_starbesger_form():
             sig_data.extend(parse_urls(url_data))
         structured_sigs = parse_signatures(sig_data)
 
+        if not Constants.OUTPUT_FOLDER.exists():
+            Path.mkdir(Constants.OUTPUT_FOLDER)
+
         order_folder = Path(f"{Constants.OUTPUT_FOLDER}/{name}_{datum}")
         if not order_folder.exists():
             Path.mkdir(order_folder)
@@ -30,16 +38,28 @@ def higo_starbesger_form():
             pdf_name = write_order_pdf(order_folder, data)
             flash(f'"{pdf_name}.pdf" geschrieben')
 
-        if form.zip_file.data:
-            zip_path = Path(f'{order_folder}/{name}_{datum}.zip')
-            create_zip(zip_path, order_folder)
-            dl_url = Path(f'/higo_starbesger/output/{name}_{datum}/{name}_{datum}.zip') # dl url needs to be provide a relative path
-            message = Markup(f"<a href='{dl_url}'>ZIP downloaden</a>")
-            flash(message)
+        #if form.zip_file.data:
+        # create ZIP and prepare download
+        zip_path = Path(f'{order_folder}/{name}_{datum}.zip')
+        create_zip(zip_path, order_folder)
+        dl_url = Path(f'/higo_starbesger/output/{name}_{datum}/{name}_{datum}.zip') # dl url needs to be provide a relative path
+        message = Markup(f"<a href='{dl_url}?del={form.delete_after_dl.data}&leg={form.legacy_dl.data}'>ZIP herunterladen</a>")
+        flash(message)
 
     return render_template("higo_starbesger/form.html", form=form)
 
+@higo_starbgesger.route('/higo_starbesger/output/<string:folder>/<path:zip>')
+def download_file(folder,zip):
+    cleanup = request.args.get('del')
+    legacy = request.args.get('leg')
+    folder_path = Path(f'{Constants.OUTPUT_FOLDER}/{folder}')
+    zip_path = Path(f'{folder_path}/{zip}')
+    print(f'{cleanup, legacy}', file=sys.stdout)
+    if legacy == 'True': # legacy method simply sends the file and keeps all files on the server
+        return send_from_directory(folder_path, zip, as_attachment=True)
+    else: # stream from memory
+        stream_data = stream_zip(zip_path)
+        if cleanup == 'True': # cleanup does not work with legacy method
+            shutil.rmtree(folder_path)
+        return send_file(stream_data, mimetype='application/zip', as_attachment=True, attachment_filename=zip)
 
-@higo_starbgesger.route('/higo_starbesger/output/<path:filename>')
-def download_file(filename):
-    return send_from_directory(Constants.OUTPUT_FOLDER, filename, as_attachment=True)
