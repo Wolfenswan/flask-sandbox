@@ -16,7 +16,7 @@ from zipfile import ZipFile
 import pdfrw
 import requests
 import bs4
-from projects.higo_starbesger.constants import Constants
+from projects.stahh_besger.constants import Constants
 
 def parse_urls(url_data):
 	''' Retrieve the signature from the search query '''

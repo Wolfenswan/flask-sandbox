@@ -7,8 +7,6 @@
 __pycache__/
 venv_win/
 
-/projects/higo_starbesger/output/*
-/konzepte.txt
-/projects/higo_starbesger/todo.txt
+/projects/stahh_besger/output/*
 /.idea/jsLibraryMappings.xml
 /.idea/vcs.xml

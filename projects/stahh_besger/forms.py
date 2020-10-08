@@ -26,7 +26,7 @@ def url_validation():
     return _url_validation
 
 class InputForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired(message='Bitte Namen des Bestellers angeben')])
+    name = StringField('Name, Vorname', validators=[DataRequired(message='Bitte Namen des Bestellers angeben')])
     datum = DateField('Datum', validators=[DataRequired(message='Bitte Datum auswählen')])
     signaturen = TextAreaField('Signaturen',[signaturen_validation()])
     urls = TextAreaField('URLs',[url_validation()])

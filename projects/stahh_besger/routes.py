@@ -5,17 +5,17 @@ import sys
 from flask import flash, send_from_directory, Flask, send_file, request, Response
 from markupsafe import Markup
 
-from projects.higo_starbesger.starbesger import parse_signatures, parse_urls, write_order_pdf, process_form_data, \
+from projects.stahh_besger.stahh_besger import parse_signatures, parse_urls, write_order_pdf, process_form_data, \
     create_zip, stream_zip
-from projects.higo_starbesger.forms import InputForm
-from projects.higo_starbesger.constants import Constants
+from projects.stahh_besger.forms import InputForm
+from projects.stahh_besger.constants import Constants
 from pathlib import Path
 
 from flask import Blueprint, render_template
-higo_starbgesger = Blueprint('higo_starbgesger', __name__,template_folder='templates/higo_starbesger')
+stahh_besger = Blueprint('stahh_besger', __name__,template_folder='templates/stahh_besger')
 
-@higo_starbgesger.route('/higo_starbesger/', methods=["GET", "POST"])
-def higo_starbesger_form():
+@stahh_besger.route('/stahh_besger/', methods=["GET", "POST"])
+def stahh_besger_form():
     form = InputForm()
     if form.validate_on_submit():
         name, datum, sig_data, url_data = process_form_data(form) # extract strings and lists from submitted form
@@ -42,13 +42,13 @@ def higo_starbesger_form():
         # create ZIP and prepare download
         zip_path = Path(f'{order_folder}/{name}_{datum}.zip')
         create_zip(zip_path, order_folder)
-        dl_url = Path(f'/higo_starbesger/output/{name}_{datum}/{name}_{datum}.zip') # dl url needs to be provide a relative path
+        dl_url = Path(f'/stahh_besger/output/{name}_{datum}/{name}_{datum}.zip') # dl url needs to be provide a relative path
         message = Markup(f"<a href='{dl_url}?del={form.delete_after_dl.data}&leg={form.legacy_dl.data}'>ZIP herunterladen</a>")
         flash(message)
 
-    return render_template("higo_starbesger/form.html", form=form)
+    return render_template("stahh_besger/form.html", form=form)
 
-@higo_starbgesger.route('/higo_starbesger/output/<string:folder>/<path:zip>')
+@stahh_besger.route('/stahh_besger/output/<string:folder>/<path:zip>')
 def download_file(folder,zip):
     cleanup = request.args.get('del')
     legacy = request.args.get('leg')
