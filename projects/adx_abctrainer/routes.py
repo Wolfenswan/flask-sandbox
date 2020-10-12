@@ -1,5 +1,3 @@
-
-
 from flask import Blueprint, render_template, redirect
 
 from projects.adx_abctrainer.adx_abctrainer import parse_word_to_html
@@ -22,3 +20,7 @@ def abctrainer_word(word):
         return render_template('adx_abctrainer/word.html', word=word)
     else:
         return redirect('/adx_abctrainer/')
+
+@adx_abctrainer.route('/adx_abctrainer/static/<image>')
+def abctrainer_img(image):
+    return f'static/img/{image}'

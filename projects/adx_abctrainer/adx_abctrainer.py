@@ -6,11 +6,12 @@ from markupsafe import Markup
 
 def parse_word_to_html(word):
     html_list = ['<div>']
-    image_folder = '/static/adx_abctrainer/images/'
+    #image_folder = os.path.join(os.path.dirname(__file__),'/img/')
+    image_folder = '../static/adx_abctrainer/img/'
     for i, letter in enumerate(list(word)):
-        path = f'{image_folder}/{letter.lower()}.png'
-        img = f'{path}'
-        html = f'<img src={img}>'
+        #path = f'{image_folder}{letter.lower()}.png'
+        #html = f'<img src={path}>'
+        html = f'<img src="{image_folder}{letter.lower()}.png">'
         html_list.append(html)
         if (i + 1) % 6 == 0:
             html_list.append('</div>\n<div>')
