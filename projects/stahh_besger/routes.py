@@ -52,7 +52,7 @@ def stahh_besger_form(debug=False, mk_zip=True):
 
     return render_template("stahh_besger/form.html", form=form)
 
-@stahh_besger_bp.route('/stahh_besger/output/<order>.zip')
+@stahh_besger_bp.route('/stahh_besger/output/<string:order>.zip')
 def download_file(order):
     cleanup = request.args.get('del')
     legacy = request.args.get('leg')
@@ -77,6 +77,6 @@ def dryrun():
     order_dir = Path(f"{Constants.OUTPUT_DIR}/{name}_{datum}")
     return f"""
             Outputfolder: {Path(f"{order_dir}")} <br/>
-            Zip-Route: {url_for('.download_file', folder=f'{order_dir}")',zip_name=f'{name}_{datum}.zip')}<br/>
+            Zip-Route: {url_for('.download_file', order = f"{name}_{datum}")}<br/>
             Zip-Location: {Path(f'{order_dir}/{name}_{datum}.zip')}
-    """
+            """
