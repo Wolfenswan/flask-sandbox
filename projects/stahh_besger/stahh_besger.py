@@ -11,12 +11,30 @@ This script replaces this procedure with a single csv-table where the user only 
 '''
 import os
 import io
-from zipfile import ZipFile
+import zipfile
+from pathlib import Path
 
 import pdfrw
 import requests
 import bs4
-from projects.stahh_besger.constants import Constants
+from flask import Flask
+
+
+class Constants():
+	#STATIC_DIR = Flask(__name__).static_folder
+	ROOT_DIR = Flask(__name__).root_path
+	INSTANCE_DIR = Path(f'{Flask(__name__).instance_path}/stahh_besger/')
+	REL_PROJECT_PATH = '/projects/stahh_besger/'
+	TEMPLATE_PDF = Path(f'{ROOT_DIR}/static/bestellschein.pdf')
+	OUTPUT_DIR = Path(f'{INSTANCE_DIR}/output/')
+
+	REQUIRED_DIRS = [INSTANCE_DIR, OUTPUT_DIR] # used on app startup to create these directories
+
+	QUERY_URL = 'https://recherche.staatsarchiv.hamburg.de/ScopeQuery5.2/detail.aspx?ID='
+	NAME_KEY = "Name"
+	DATE_KEY = "Datum"
+	ID1_KEY = "Bestand"
+	ID2_KEY = "Sig"
 
 def parse_urls(url_data):
 	''' Retrieve the signature from the search query '''
@@ -47,9 +65,9 @@ def write_order_pdf(output_folder, data):
 	Credits to https://bostata.com/how-to-populate-fillable-pdfs-with-python/
 	'''
 
-	template_pdf = pdfrw.PdfReader(Constants.TEMPLATE_PDF)
+	template_pdf = pdfrw.PdfReader(Constants.TEMPLATE_PDF) # todo; shouldn't this also work with url_for?
 	pdf_name = f'Bestellschein {data[Constants.NAME_KEY]} {data[Constants.DATE_KEY]} {data[Constants.ID1_KEY]}_{data[Constants.ID2_KEY]}'
-	new_pdf_path = output_folder / f'{pdf_name}.pdf'
+	new_pdf_path = output_folder / f'{pdf_name}.pdf' # todo use Path
 
 	annot_key = '/Annots'
 	annot_field_Key = '/T'
@@ -77,7 +95,7 @@ def process_form_data(form):
 	return name,datum,sig_data,url_data
 
 def create_zip(zip_path, folder):
-	with ZipFile(zip_path, 'w') as zip_file:
+	with zipfile.ZipFile(zip_path, 'w') as zip_file:
 		for folderName, subfolders, filenames in os.walk(folder):
 			for filename in filenames:
 				if "pdf" in filename:

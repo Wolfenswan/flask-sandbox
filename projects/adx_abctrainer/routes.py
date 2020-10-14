@@ -1,11 +1,11 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template, redirect, flash, url_for
 
 from projects.adx_abctrainer.adx_abctrainer import parse_word_to_html
 from projects.adx_abctrainer.form import InputForm
 
-adx_abctrainer = Blueprint('adx_abctrainer', __name__,template_folder='templates/adx_abctrainer/')
+adx_abctrainer_bp = Blueprint('adx_abctrainer', __name__, template_folder='templates/adx_abctrainer/')
 
-@adx_abctrainer.route('/adx_abctrainer/', methods=["GET", "POST"])
+@adx_abctrainer_bp.route('/adx_abctrainer/', methods=["GET", "POST"])
 def abctrainer_form():
     form = InputForm()
     if form.validate_on_submit():
@@ -13,7 +13,7 @@ def abctrainer_form():
     return render_template("adx_abctrainer/form.html", form=form)
 
 
-@adx_abctrainer.route('/adx_abctrainer/<word>')
+@adx_abctrainer_bp.route('/adx_abctrainer/<word>')
 def abctrainer_word(word):
     if word.isalpha() and len(word) <= 18:
         word = parse_word_to_html(word)
