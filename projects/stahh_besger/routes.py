@@ -52,7 +52,7 @@ def stahh_besger_form(debug=False, mk_zip=True):
 
     return render_template("stahh_besger/form.html", form=form)
 
-@stahh_besger_bp.route('/stahh_besger/output/<string:order>')
+@stahh_besger_bp.route('/stahh_besger/output/<order>.zip')
 def download_file(order):
     cleanup = request.args.get('del')
     legacy = request.args.get('leg')
