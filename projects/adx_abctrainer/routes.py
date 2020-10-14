@@ -1,9 +1,13 @@
-from flask import Blueprint, render_template, redirect, flash, url_for
+from flask import Blueprint, render_template, redirect, url_for
 
 from projects.adx_abctrainer.adx_abctrainer import parse_word_to_html
 from projects.adx_abctrainer.form import InputForm
 
 adx_abctrainer_bp = Blueprint('adx_abctrainer', __name__, template_folder='templates/adx_abctrainer/')
+
+@adx_abctrainer_bp.route('/', subdomain='abctrainer')
+def abctrainer_subdomain():
+    return redirect(url_for('.abctrainer_form'))
 
 @adx_abctrainer_bp.route('/adx_abctrainer/', methods=["GET", "POST"])
 def abctrainer_form():
