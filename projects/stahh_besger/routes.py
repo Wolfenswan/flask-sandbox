@@ -42,7 +42,9 @@ def stahh_besger_form(debug=False, mk_zip=True):
                 flash(f'ZIP: {zip_path}')
             create_zip(zip_path, order_dir)
             # todo: https://medium.com/analytics-vidhya/receive-or-return-files-flask-api-8389d42b0684 (Improve)
-            dl_url = url_for('.download_file', folder=f'{order_dir}',zip_name=f'{name}_{datum}.zip') # dl url needs to be provide a relative path
+            #dl_url = url_for('.download_file', folder=f'{order_dir}',zip_name=f'{name}_{datum}.zip') # dl url needs to be provide a relative path
+            dl_url = url_for('.download_file', order = f'{name}_{datum}')
+            #folder=f'{order_dir}',zip_name=f'{name}_{datum}.zip') # dl url needs to be provide a relative path
             if debug:
                 flash(dl_url)
             message = Markup(f"<a href='{dl_url}?del={form.delete_after_dl.data}&leg={form.legacy_dl.data}'>ZIP herunterladen</a>")
@@ -50,10 +52,12 @@ def stahh_besger_form(debug=False, mk_zip=True):
 
     return render_template("stahh_besger/form.html", form=form)
 
-@stahh_besger_bp.route('/stahh_besger/output/<string:folder>/<zip_name>')
-def download_file(folder, zip_name):
+@stahh_besger_bp.route('/stahh_besger/output/<string:order>')
+def download_file(order):
     cleanup = request.args.get('del')
     legacy = request.args.get('leg')
+    folder = Path(f"{Constants.OUTPUT_DIR}/{order}")
+    zip_name = f'{order}.zip'
     zip_path = Path(f'{folder}/{zip_name}')
     if legacy == 'True': # legacy method simply sends the file and keeps all files on the server
         return send_from_directory(folder, zip_name, as_attachment=True)
@@ -73,6 +77,6 @@ def dryrun():
     order_dir = Path(f"{Constants.OUTPUT_DIR}/{name}_{datum}")
     return f"""
             Outputfolder: {Path(f"{order_dir}")} <br/>
-            Zip-Route: {url_for('.download_file', folder=f'{order_dir}")',zip_name=f'{name}_{datum}.zip')}
+            Zip-Route: {url_for('.download_file', folder=f'{order_dir}")',zip_name=f'{name}_{datum}.zip')}<br/>
             Zip-Location: {Path(f'{order_dir}/{name}_{datum}.zip')}
     """
