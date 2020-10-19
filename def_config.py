@@ -1,5 +1,5 @@
 """
-default config, move to instance.py
+default config, move to /instance/
 TODO if possible, check in app.py if instance/config exists and if not copy/move this file
 """
 
