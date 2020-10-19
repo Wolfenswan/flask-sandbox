@@ -66,7 +66,7 @@ def write_order_pdf(output_folder, data):
 	'''
 
 	template_pdf = pdfrw.PdfReader(Constants.TEMPLATE_PDF) # todo; shouldn't this also work with url_for?
-	pdf_name = f'Bestellschein {data[Constants.NAME_KEY]} {data[Constants.DATE_KEY]} {data[Constants.ID1_KEY]}_{data[Constants.ID2_KEY]}'
+	pdf_name = f'Bestellschein {data[Constants.NAME_KEY]} {data[Constants.DATE_KEY]} {data[Constants.ID1_KEY]}_{data[Constants.ID2_KEY].replace("/","")}'
 	new_pdf_path = output_folder / f'{pdf_name}.pdf' # todo use Path
 
 	annot_key = '/Annots'
