@@ -9,7 +9,7 @@ from markupsafe import Markup
 def parse_word_to_html(word):
     html_list = ['<div>']
     for i, letter in enumerate(list(word)):
-        img_path = url_for('static', filename=f'adx_abctrainer/img/{letter.lower()}.png')
+        img_path = url_for('static', filename=f'adx_abctrainer/img/abc/{letter.lower()}.png')
         html = f'<img src="{img_path}">'
         html_list.append(html)
         if (i + 1) % 6 == 0:
