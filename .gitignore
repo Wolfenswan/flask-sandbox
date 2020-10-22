@@ -12,3 +12,6 @@ venv_win/
 /.idea/vcs.xml
 /instance/*
 /ToDo
+
+.htaccess
+flask.wsgi
