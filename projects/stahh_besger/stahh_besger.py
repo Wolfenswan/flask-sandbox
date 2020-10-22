@@ -21,14 +21,12 @@ from flask import Flask
 
 
 class Constants():
-	#STATIC_DIR = Flask(__name__).static_folder
 	ROOT_DIR = Flask(__name__).root_path
-	INSTANCE_DIR = Path(f'{Flask(__name__).instance_path}/stahh_besger/')
 	REL_PROJECT_PATH = '/projects/stahh_besger/'
+	OUTPUT_DIR = Path(f'{ROOT_DIR}/output/')
 	TEMPLATE_PDF = Path(f'{ROOT_DIR}/static/bestellschein.pdf')
-	OUTPUT_DIR = Path(f'{INSTANCE_DIR}/output/')
 
-	REQUIRED_DIRS = [INSTANCE_DIR, OUTPUT_DIR] # used on app startup to create these directories
+	REQUIRED_DIRS = [OUTPUT_DIR] # used on app startup to create these directories
 
 	QUERY_URL = 'https://recherche.staatsarchiv.hamburg.de/ScopeQuery5.2/detail.aspx?ID='
 	NAME_KEY = "Name"
