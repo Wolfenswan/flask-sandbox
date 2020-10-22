@@ -2,7 +2,12 @@ from pathlib import Path
 
 from flask import Flask, render_template
 
-from instance.config import Config
+try:
+    from instance.config import Config
+except ModuleNotFoundError as err:
+    print(err) # proper logging
+    from def_config import Config
+
 from projects.adx_abctrainer.routes import adx_abctrainer_bp
 from projects.stahh_besger import stahh_besger
 from projects.stahh_besger.routes import stahh_besger_bp
