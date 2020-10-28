@@ -18,6 +18,10 @@ div .list-group a:hover{
     color:white;
 }
 
+.adx-logo-row {
+    padding-top: 2rem;
+}
+
 .adx-letter {
     border: 0.03rem solid lightgray;
     border-radius: .25rem;
