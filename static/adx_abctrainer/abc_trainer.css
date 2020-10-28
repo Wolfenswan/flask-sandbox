@@ -34,3 +34,9 @@ div .list-group a:hover{
 .adx-button {
     margin: 1.5rem;
 }
+
+.adx-recommended {
+   margin-right: .25rem!important;
+   margin-bottom: .25rem!important;
+    border-radius: .25rem!important;
+}

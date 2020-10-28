@@ -20,14 +20,11 @@
         {% endwith %}
     </div>
     <div class="container">
-        <div class="row">
-            {% block content_1 %}
-            {% endblock %}
-        </div>
-        <div class="row">
-            {% block content_2 %}
-            {% endblock %}
-        </div>
+        {% block content_1 %}
+        {% endblock %}
+
+        {% block content_2 %}
+        {% endblock %}
     </div>
     <div class="container-fluid">
         {% block content_max %}

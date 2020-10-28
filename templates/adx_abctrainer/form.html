@@ -8,30 +8,34 @@
 {% endblock %}
 
 {% block content_1 %}
-    <div class="col-7">
-        <h1>AUDAX - ABC Trainings Generator</h1>
-        <form action="" method="post" novalidate>
-                {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.word.label(class='h6') }}<br>
-                        {{ form.word(size=12,class='form-control') }}
-                        {% for error in form.word.errors %}
-                            <div class=".alert-danger">[{{ error }}]</div>
-                        {% endfor %}
-                    </div>
-                    <p>{{ form.submit(class='btn btn-primary') }}</p>
-        </form>
+    <div class="row">
+        <div class="col-7">
+            <h1>AUDAX - ABC Trainings Generator</h1>
+            <form action="" method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                        <div class="form-group">
+                            {{ form.word.label(class='h6') }}<br>
+                            {{ form.word(size=12,class='form-control') }}
+                            {% for error in form.word.errors %}
+                                <div class=".alert-danger">[{{ error }}]</div>
+                            {% endfor %}
+                        </div>
+                        <p>{{ form.submit(class='btn btn-primary') }}</p>
+            </form>
+        </div>
     </div>
 {% endblock %}
 
 {% block content_2 %}
-    <div class="col-7">
-        <h3>Vom Cheftrainer Empfohlen</h3>
+    <div class="row"><h3>Vom Cheftrainer Empfohlen</h3></div>
+    <div class="row">
         <div class="list-group list-group-horizontal">
-        <a href="{{url_for('adx_abctrainer.abctrainer_word',word='corona')}}" class='list-group-item list-group-item-action'>CORONA</a>
-        <a href="{{url_for('adx_abctrainer.abctrainer_word',word='muskelkatzen')}}" class='list-group-item list-group-item-action'>MUSKELKATZEN</a>
-        <a href="{{url_for('adx_abctrainer.abctrainer_word',word='ruhrstrasse')}}" class='list-group-item list-group-item-action'>RUHRSTRASSE</a>
-        <a href="{{url_for('adx_abctrainer.abctrainer_word',word='boxhandschuhe')}}" class='list-group-item list-group-item-action'>BOXHANDSCHUHE</a>
+            {% for word in word_list %}
+                <a href="{{url_for('adx_abctrainer.abctrainer_word',word=word.lower() )}}" class='adx-recommended list-group-item list-group-item-action'>{{ word.upper() }}</a>
+                {% if loop.index % 4 == 0 %}
+                    </div><div class="list-group list-group-horizontal">
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

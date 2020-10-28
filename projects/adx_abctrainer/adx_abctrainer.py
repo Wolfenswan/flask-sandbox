@@ -6,6 +6,8 @@ from pathlib import Path
 from flask import url_for
 from markupsafe import Markup
 
+WORD_LIST = ['Corona','Muskelkatzen','Ruhrstrasse','Boxhandschuhe']
+
 def parse_word_to_html(word):
     """ Turns the given word into a list of img & div tags for the jinja-template """
     html_list = ['<div class="adx-letters_row">']
