@@ -17,3 +17,20 @@ div .list-group a:hover{
     background-color:#d17206;
     color:white;
 }
+
+.adx-letter {
+    border: 0.03rem solid lightgray;
+    border-radius: .25rem;
+    margin-top: 0.15rem;
+    margin-bottom: 0.15rem;
+}
+
+.adx-infobox {
+    margin-top: 0.15rem;
+    margin-bottom: 0.25rem;
+    margin-left: 0.25rem;
+}
+
+.adx-button {
+    margin: 1.5rem;
+}
