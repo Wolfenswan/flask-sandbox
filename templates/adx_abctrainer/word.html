@@ -14,9 +14,12 @@
         <div class="col-sm"></div>
         <div class="col-sm"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
     </div>
-    {% for tag in word %} {# HTML-tags (div and img) are provided through parse_word_to_html() #}
-        {{ tag }}
+    {% for letter_path in word %}
+        <img src="{{ letter_path }}" class="adx-letter">
     {% endfor %}
+{#    {% for tag in word %} {# HTML-tags (div and img) are provided through parse_word_to_html() #}
+{#        {{ tag }}#}
+{#    {% endfor %}#}
     <div class="row justify-content-left adx-infobox">
         <div class="alert alert-info" role="alert">
         <i class="fas fa-exclamation"></i> Alle Übungen so schnell wie möglich abarbeiten. Pausen nur wenn nötig einlegen.<br/>

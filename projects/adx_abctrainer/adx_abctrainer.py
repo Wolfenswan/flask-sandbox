@@ -9,7 +9,7 @@ from markupsafe import Markup
 WORD_LIST = ['Corona','Muskelkatzen','Ruhrstrasse','Boxhandschuhe']
 
 def parse_word_to_html(word):
-    """ Turns the given word into a list of img & div tags for the jinja-template """
+    """ OBSOLETE Turns the given word into a list of img & div tags for the jinja-template """
     html_list = ['<div class="adx-letters_row">']
     for i, letter in enumerate(list(word)):
         img_path = url_for('static', filename=f'adx_abctrainer/img/abc/{letter.lower()}.png')
@@ -20,3 +20,12 @@ def parse_word_to_html(word):
     html_list.append('</div>')
     finalized_html = [Markup(tag) for tag in html_list]
     return finalized_html
+
+def parse_word(word):
+    """ Returns: list of strings (paths to image for each letter) """
+    letters = []
+    for letter in list(word):
+        img_path = url_for('static', filename=f'adx_abctrainer/img/abc/{letter.lower()}.png')
+        letters.append(img_path)
+    return letters
+
