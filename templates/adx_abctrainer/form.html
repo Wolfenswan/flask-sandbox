@@ -9,12 +9,12 @@
 
 {% block content %}
     <div class="container">
-        <div class="adx-logo-row row">
-            <div class="col-3"><img width="160px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_abctrainer.png') }}"></div>
+        <div class="adx-logo-row adx-row row">
+            <div class="col-4"><img width="160px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_abctrainer.png') }}"></div>
             <div class="col-3"><img height="70px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
         </div>
         <div class="row"><h1>ABC Trainings Generator</h1></div>
-        <div class="row">
+        <div class="adx-row row">
             <div class="col-4">
                 <form action="" method="post" novalidate class="form-inline">
                         {{ form.hidden_tag() }}
