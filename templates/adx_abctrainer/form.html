@@ -23,9 +23,6 @@
                                 {{ form.word.label(class='sr-only') }}<br>
                                 {{ form.word(size=18,class='form-control mb-2 mr-sm-2', placeholder='Zauberwort...') }}
                                 {{ form.submit(class='btn btn-primary mb-2') }}
-{#                                {% for error in form.word.errors %}#}
-{#                                    <div class=".alert-danger mb-2">{{ error }}</div>#}
-{#                                {% endfor %}#}
                             </div>
                             {% if form.word.errors %}
                                   {% for error in form.word.errors %}

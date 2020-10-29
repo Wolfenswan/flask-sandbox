@@ -18,14 +18,11 @@
         {% for letter_path in word %}
             <img src="{{ letter_path }}" class="adx-letter">
         {% endfor %}
-    {#    {% for tag in word %} {# HTML-tags (div and img) are provided through parse_word_to_html() #}
-    {#        {{ tag }}#}
-    {#    {% endfor %}#}
         <div class="row justify-content-left adx-infobox">
             <div class="alert alert-info" role="alert">
             <i class="fas fa-exclamation"></i> Alle Übungen so schnell wie möglich abarbeiten. Pausen nur wenn nötig einlegen.<br/>
             <i class="fas fa-info"></i> Präsentiert von <a target="_blank" href="https://heartbrands.eu/de/">heartbrands.eu</a> und <a target="_blank" href="https://www.audax-sv.de/">audax.hamburg</a>.<br/>
-            <i class="fas fa-info"></i> Gemacht mit <i class="fas fa-heart"></i> und <i class="fab fa-python"></i> von Markus.<br/>
+                <i class="fas fa-info"></i> Gemacht mit <i class="fas fa-heart"></i> und <a href="https://www.python.org/" target="_blank"><i class="fab fa-python"></i></a> von <A HREF="&#109;&#97;&#105;&#108;&#116;&#111;&#58;%66%72%69%64%61%79%6E%69%67%68%74%73%61%72%65%6B%69%6C%6C%69%6E%67%6D%65%2B%61%62%63%74%72%61%69%6E%65%72%40%67%6D%61%69%6C%2E%63%6F%6D">Markus</A>.<br/>
             </div>
             <div>
                 <a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary adx-button">Neue Übung!</a>
