@@ -8,32 +8,34 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='adx_abctrainer/abc_trainer.css') }}">
 {% endblock %}
 
-{% block content_max %}
-    <div class="adx-logo-row row">
-        <div class="col-sm"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_abctrainer.png') }}"></div>
-        <div class="col-sm"></div>
-        <div class="col-sm"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
-    </div>
-    {% for letter_path in word %}
-        <img src="{{ letter_path }}" class="adx-letter">
-    {% endfor %}
-{#    {% for tag in word %} {# HTML-tags (div and img) are provided through parse_word_to_html() #}
-{#        {{ tag }}#}
-{#    {% endfor %}#}
-    <div class="row justify-content-left adx-infobox">
-        <div class="alert alert-info" role="alert">
-        <i class="fas fa-exclamation"></i> Alle Übungen so schnell wie möglich abarbeiten. Pausen nur wenn nötig einlegen.<br/>
-        <i class="fas fa-info"></i> Präsentiert von <a target="_blank" href="https://heartbrands.eu/de/">heartbrands.eu</a> und <a target="_blank" href="https://www.audax-sv.de/">audax.hamburg</a>.<br/>
-        <i class="fas fa-info"></i> Gemacht mit <i class="fas fa-heart"></i> und <i class="fab fa-python"></i> von Markus.<br/>
+{% block content %}
+    <div class="container-fluid">
+        <div class="adx-logo-row row">
+            <div class="col-3"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_abctrainer.png') }}"></div>
+            <div class="col-4"></div>
+            <div class="col-3"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
         </div>
-        <div>
-            <a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary adx-button">Neue Übung!</a>
+        {% for letter_path in word %}
+            <img src="{{ letter_path }}" class="adx-letter">
+        {% endfor %}
+    {#    {% for tag in word %} {# HTML-tags (div and img) are provided through parse_word_to_html() #}
+    {#        {{ tag }}#}
+    {#    {% endfor %}#}
+        <div class="row justify-content-left adx-infobox">
+            <div class="alert alert-info" role="alert">
+            <i class="fas fa-exclamation"></i> Alle Übungen so schnell wie möglich abarbeiten. Pausen nur wenn nötig einlegen.<br/>
+            <i class="fas fa-info"></i> Präsentiert von <a target="_blank" href="https://heartbrands.eu/de/">heartbrands.eu</a> und <a target="_blank" href="https://www.audax-sv.de/">audax.hamburg</a>.<br/>
+            <i class="fas fa-info"></i> Gemacht mit <i class="fas fa-heart"></i> und <i class="fab fa-python"></i> von Markus.<br/>
+            </div>
+            <div>
+                <a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary adx-button">Neue Übung!</a>
+            </div>
         </div>
+    {#    <div class="row justify-content-center">#}
+    {#        <div>#}
+    {#        <div class="col-2">#}
+    {#            <a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary">Neue Übung!</a>#}
+    {#        </div>#}
+    {#    </div>#}
     </div>
-{#    <div class="row justify-content-center">#}
-{#        <div>#}
-{#        <div class="col-2">#}
-{#            <a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary">Neue Übung!</a>#}
-{#        </div>#}
-{#    </div>#}
 {% endblock %}

@@ -7,35 +7,45 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='adx_abctrainer/abc_trainer.css') }}">
 {% endblock %}
 
-{% block content_1 %}
-    <div class="row">
-        <div class="col-7">
-            <h1>AUDAX - ABC Trainings Generator</h1>
-            <form action="" method="post" novalidate>
-                    {{ form.hidden_tag() }}
-                        <div class="form-group">
-                            {{ form.word.label(class='h6') }}<br>
-                            {{ form.word(size=12,class='form-control') }}
-                            {% for error in form.word.errors %}
-                                <div class=".alert-danger">[{{ error }}]</div>
-                            {% endfor %}
-                        </div>
-                        <p>{{ form.submit(class='btn btn-primary') }}</p>
-            </form>
+{% block content %}
+    <div class="container">
+        <div class="adx-logo-row row">
+            <div class="col-3"><img width="160px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_abctrainer.png') }}"></div>
+            <div class="col-3"><img height="70px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
         </div>
-    </div>
-{% endblock %}
+        <div class="row"><h1>ABC Trainings Generator</h1></div>
+        <div class="row">
+            <div class="col-4">
+                <form action="" method="post" novalidate class="form-inline">
+                        {{ form.hidden_tag() }}
+                        {{ form.csrf_token() }}
+                            <div class="form-group">
+                                {{ form.word.label(class='sr-only') }}<br>
+                                {{ form.word(size=18,class='form-control mb-2 mr-sm-2', placeholder='Zauberwort...') }}
+                                {{ form.submit(class='btn btn-primary mb-2') }}
+{#                                {% for error in form.word.errors %}#}
+{#                                    <div class=".alert-danger mb-2">{{ error }}</div>#}
+{#                                {% endfor %}#}
+                            </div>
+                            {% if form.word.errors %}
+                                  {% for error in form.word.errors %}
+                                      <div class="alert alert-danger">{{ error }}</div>
+                                  {% endfor %}
+                            {% endif %}
+                </form>
+            </div>
+        </div>
 
-{% block content_2 %}
-    <div class="row"><h3>Vom Cheftrainer Empfohlen</h3></div>
-    <div class="row">
-        <div class="list-group list-group-horizontal">
-            {% for word in word_list %}
-                <a href="{{url_for('adx_abctrainer.abctrainer_word',word=word.lower() )}}" class='adx-recommended list-group-item list-group-item-action'>{{ word.upper() }}</a>
-                {% if loop.index % 4 == 0 %}
-                    </div><div class="list-group list-group-horizontal">
-                {% endif %}
-            {% endfor %}
+        <div class="row"><h3>Vom Cheftrainer Empfohlen</h3></div>
+        <div class="row">
+            <div class="list-group list-group-horizontal">
+                {% for word in word_list %}
+                    <a href="{{url_for('adx_abctrainer.abctrainer_word',word=word.lower() )}}" class='adx-recommended list-group-item list-group-item-action'>{{ word.upper() }}</a>
+                    {% if loop.index % 4 == 0 %}
+                        </div><div class="list-group list-group-horizontal">
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

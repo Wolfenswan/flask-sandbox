@@ -1,25 +1,24 @@
 {% extends "base.html" %}
 
-{% block content_1 %}
-    <div class="col-md">
-        <h3>Markus Bassermann</h3>
-        <div>History | Python Programming</div>
-        <p>This is not a homepage but my sandbox. Things might break.</p>
-        <h3>Project Examples</h3>
-        <ul>
-            <li><a href="{{url_for ('stahh_besger.stahh_besger_form') }}">Staatsarchiv Hamburg</a> order-file generator</li>
-            <li><a href="{{url_for ('adx_abctrainer.abctrainer_form') }}">ABC Trainer</a> for Audax-SV (my gym)</li>
-            <li><a href="https://github.com/Wolfenswan/RoguelikeTut-TCOD" target="_blank">unnamed roguelike</a> - my 'forever project', written in Python</li>
-        </ul>
-        <h3>Older stuff</h3>
-        <ul>
-        <li><a target="_blank" href="https://geschichten.github.io/bille/">Bille Geschichten</a> (Scripting help)</li>
-        <li><a href="https://github.com/ferstaberinde/F3" target="_blank">F3 Framework for ARMA3</a> - venerable but superseded by now; co-produced & contributed under the moniker 'Wolfenswan' </li>
-        </ul>
-        <h3>Otherwise</h3>
-        <a href="https://github.com/Wolfenswan/">Github</a> | ma.bassermann[ä]gmail.com<br/>
+{% block content %}
+    <div class="container">
+        <div class="col-md">
+            <h3>Markus Bassermann</h3>
+            <div>History | Python Programming</div>
+            <p>This is not a homepage but my sandbox. Things might break.</p>
+            <h3>Project Examples</h3>
+            <ul>
+                <li><a href="{{url_for ('stahh_besger.stahh_besger_form') }}">Staatsarchiv Hamburg</a> order-file generator</li>
+                <li><a href="{{url_for ('adx_abctrainer.abctrainer_form') }}">ABC Trainer</a> for Audax-SV (my gym)</li>
+                <li><a href="https://github.com/Wolfenswan/RoguelikeTut-TCOD" target="_blank">unnamed roguelike</a> - my 'forever project', written in Python</li>
+            </ul>
+            <h3>Older stuff</h3>
+            <ul>
+            <li><a target="_blank" href="https://geschichten.github.io/bille/">Bille Geschichten</a> (Scripting help)</li>
+            <li><a href="https://github.com/ferstaberinde/F3" target="_blank">F3 Framework for ARMA3</a> - venerable but superseded by now; co-produced & contributed under the moniker 'Wolfenswan' </li>
+            </ul>
+            <h3>Otherwise</h3>
+            <a href="https://github.com/Wolfenswan/">Github</a> | ma.bassermann[ä]gmail.com<br/>
+        </div>
     </div>
-{% endblock %}
-{% block content_2 %}
-
 {% endblock %}
