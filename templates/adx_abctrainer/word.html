@@ -53,6 +53,14 @@
                         {{ form_2.submit(class='btn btn-primary mb-2') }}
                     </div>
                 </form>
+                {% if form_2.errors %}
+                    {% for error in form_2.min.errors %}
+                        <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
+                    {% endfor %}
+                    {% for error in form_2.max.errors %}
+                        <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
+                    {% endfor %}
+                {% endif %}
             </div>
     {#    <div class="row justify-content-center">#}
     {#        <div>#}
