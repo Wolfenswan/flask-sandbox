@@ -51,5 +51,5 @@ def abctrainer_random():
         word = max(WORDS_RANDOM, key=len)
 
     if word != '':
-        return redirect(f'/adx_abctrainer/{word}?min={min}&max={max}')
+        return redirect(f'/adx_abctrainer/{word}?min={min_length}&max={max_length}')
     return redirect('/adx_abctrainer/')
