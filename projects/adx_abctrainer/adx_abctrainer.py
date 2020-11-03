@@ -7,7 +7,7 @@ from flask import url_for, Flask
 from markupsafe import Markup
 
 WORD_LENGTH_MIN = 3
-WORD_LENGTH_MAX = 26
+WORD_LENGTH_MAX = 18
 
 with open(Path(f'{Flask(__name__).root_path}/static/woerter_vorauswahl.txt'), 'r') as f:
     WORDS_PRESELECTED = f.read().split()

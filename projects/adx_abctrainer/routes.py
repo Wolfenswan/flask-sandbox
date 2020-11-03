@@ -41,12 +41,15 @@ def abctrainer_word(word):
 
 @adx_abctrainer_bp.route('/adx_abctrainer/random')
 def abctrainer_random():
-    min = int(request.args.get('min',WORD_LENGTH_MIN))
-    max = int(request.args.get('max',WORD_LENGTH_MAX))
+    min_length = int(request.args.get('min',WORD_LENGTH_MIN))
+    max_length = int(request.args.get('max',WORD_LENGTH_MAX))
 
-    possible_words = [word for word in WORDS_RANDOM if len(word) >= min and len(word) <= max]
+    possible_words = [word for word in WORDS_RANDOM if len(word) >= min_length and len(word) <= max_length]
+    if len(possible_words) > 0:
+        word = random.choice(possible_words)
+    else: # fallback in case no word of the selected length is in the list
+        word = max(WORDS_RANDOM, key=len)
 
-    word = random.choice(possible_words)
     if word != '':
         return redirect(f'/adx_abctrainer/{word}?min={min}&max={max}')
     return redirect('/adx_abctrainer/')
