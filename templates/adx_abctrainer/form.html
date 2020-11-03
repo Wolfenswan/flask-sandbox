@@ -11,37 +11,74 @@
     <div class="container">
         <div class="adx-logo-row adx-row row">
             <div class="col-4"><img width="160px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_abctrainer.png') }}"></div>
-            <div class="col-3"><img height="70px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
+            <div class="col-4"></div>
+            <div class="col-4"><img height="70px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
         </div>
-        <div class="row"><h1>ABC Trainings Generator</h1></div>
-        <div class="adx-row row">
-            <div class="col-4">
-                <form action="" method="post" novalidate class="form-inline">
+        <div class="row">
+            <div class="col">
+                <div class="row"><h3>Wunsch-Training</h3></div>
+
+                    <form action="" method="post" novalidate class="form-inline">
                         {{ form.hidden_tag() }}
                         {{ form.csrf_token() }}
                             <div class="form-group">
                                 {{ form.word.label(class='sr-only') }}<br>
-                                {{ form.word(size=18,class='form-control mb-2 mr-sm-2', placeholder='Zauberwort...') }}
+                                {{ form.word(size=20,class='form-control mb-2 mr-sm-2', placeholder='Zauberwort eingeben...') }}
                                 {{ form.submit(class='btn btn-primary mb-2') }}
                             </div>
-                            {% if form.word.errors %}
-                                  {% for error in form.word.errors %}
-                                      <div class="alert alert-danger">{{ error }}</div>
-                                  {% endfor %}
-                            {% endif %}
+                    </form>
+                {% if form.word.errors %}
+                      {% for error in form.word.errors %}
+                          <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
+                      {% endfor %}
+                {% endif %}
+                <div class="alert alert-primary">
+                    <small><i class="fas fa-info"></i> Worte sollten zwischen {{ min }} und {{ max }} Buchstaben haben. Sonderzeichen und Umlaute dürfen nicht vorkommen.</small>
+                </div>
+                <div class="row"><h3>Zufalls-Training</h3></div>
+                <form action="" method="post" novalidate class="form-inline">
+                    {{ form_2.hidden_tag() }}
+                    {{ form_2.csrf_token() }}
+                        <div class="form-group">
+                            {{ form_2.min.label(class='sr-only') }}
+                            <div class="input-group mb-2 mr-sm-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Zwischen</div>
+                                </div>
+                                {{ form_2.min(size=1, min=min, max=max, class='form-control', value=min) }}
+                                {{ form_2.max.label(class='sr-only') }}
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">und</div>
+                                </div>
+                                {{ form_2.max(size=1, min=min, max=max, class='form-control', value=max) }}
+                                <div class="input-group-append">
+                                    <div class="input-group-text">Buchstaben</div>
+                                </div>
+                            </div>
+                            {{ form_2.submit(class='btn btn-primary mb-2') }}
+                        </div>
                 </form>
+                {% if form_2.errors %}
+                      {% for error in form_2.errors %}
+                          <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
+                      {% endfor %}
+                {% endif %}
+                <div class="alert alert-primary">
+                    <small><i class="fas fa-info"></i> Worte werden nach dem sogennanten "Zufallsprinzip" aus einer Liste mit knapp 650 Wörtern ausgewählt. Verwendung auf eigene Gefahr!</small>
+                </div>
             </div>
-        </div>
-
-        <div class="row"><h3>Vom Cheftrainer Empfohlen</h3></div>
-        <div class="row">
-            <div class="list-group list-group-horizontal">
-                {% for word in word_list %}
-                    <a href="{{url_for('adx_abctrainer.abctrainer_word',word=word.lower() )}}" class='adx-recommended list-group-item list-group-item-action'>{{ word.upper() }}</a>
-                    {% if loop.index % 4 == 0 %}
-                        </div><div class="list-group list-group-horizontal">
-                    {% endif %}
-                {% endfor %}
+            <div class="col">
+                <div class="row"><h3>Vom Cheftrainer Empfohlen</h3></div>
+                <div class="row">
+                    <div class="list-group list-group-horizontal">
+                        {% for word in word_list %}
+                            <a href="{{url_for('adx_abctrainer.abctrainer_word',word=word.lower())}}" class='adx-recommended list-group-item list-group-item-action'>{{ word.upper() }}</a>
+                            {% if loop.index % 4 == 0 %}
+                                </div><div class="list-group list-group-horizontal">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

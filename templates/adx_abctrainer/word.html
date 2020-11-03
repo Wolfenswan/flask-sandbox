@@ -9,30 +9,57 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="adx-logo-row row">
-            <div class="col-3"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_abctrainer.png') }}"></div>
-            <div class="col-4"></div>
-            <div class="col-3"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
-        </div>
-        {% for letter_path in word %}
-            <img src="{{ letter_path }}" class="adx-letter">
-        {% endfor %}
-        <div class="row justify-content-left adx-infobox">
-            <div class="alert alert-info" role="alert">
-            <i class="fas fa-exclamation"></i> Alle Übungen so schnell wie möglich abarbeiten. Pausen nur wenn nötig einlegen.<br/>
-            <i class="fas fa-info"></i> Präsentiert von <a target="_blank" href="https://heartbrands.eu/de/">heartbrands.eu</a> und <a target="_blank" href="https://www.audax-sv.de/">audax.hamburg</a>.<br/>
-                <i class="fas fa-info"></i> Gemacht mit <i class="fas fa-heart"></i> und <a href="https://www.python.org/" target="_blank"><i class="fab fa-python"></i></a> von <A HREF="&#109;&#97;&#105;&#108;&#116;&#111;&#58;%66%72%69%64%61%79%6E%69%67%68%74%73%61%72%65%6B%69%6C%6C%69%6E%67%6D%65%2B%61%62%63%74%72%61%69%6E%65%72%40%67%6D%61%69%6C%2E%63%6F%6D">Markus</A>.<br/>
+    <div class="container-xl">
+        <div class="col adx-wordbox">
+            <div class="adx-logo-row row">
+                <div class="col-3"><a href="{{ url_for('adx_abctrainer.abctrainer_form') }}"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_abctrainer.png') }}"></a></div>
+                <div class="col-2"></div>
+                <div class="col-3"><a target="_blank" href="https://www.audax-sv.de/"><img src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></a></div>
             </div>
-            <div>
-                <a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary adx-button">Neue Übung!</a>
+                {% for letter_path in word %}
+                    <img src="{{ letter_path }}" class="adx-letter">
+                {% endfor %}
+            <div class="row adx-infobox">
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-exclamation"></i> Alle Übungen so schnell wie möglich abarbeiten. Pausen nur wenn nötig einlegen.<br/>
+                    <i class="fas fa-info"></i> Präsentiert von <a target="_blank" href="https://heartbrands.eu/de/">heartbrands.eu</a> und <a target="_blank" href="https://www.audax-sv.de/">audax.hamburg</a>.<br/>
+                    <i class="fas fa-info"></i> Gemacht mit <i class="fas fa-heart"></i> und <a href="https://www.python.org/" target="_blank"><i class="fab fa-python"></i></a> von <A HREF="&#109;&#97;&#105;&#108;&#116;&#111;&#58;%66%72%69%64%61%79%6E%69%67%68%74%73%61%72%65%6B%69%6C%6C%69%6E%67%6D%65%2B%61%62%63%74%72%61%69%6E%65%72%40%67%6D%61%69%6C%2E%63%6F%6D">Markus</A>.<br/>
+                </div>
             </div>
-        </div>
+            <div class="row adx-word-row">
+                <a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary adx-button"><strong>Zur Startseite!</strong></a>
+
+    {#                <a href="{{ url_for('adx_abctrainer.abctrainer_random') }}" class="btn btn-primary adx-button">Neue Zufalls-Übung!</a>#}
+            </div>
+            <div class="row adx-word-row">
+                <form action="" method="post" novalidate class="form-inline">
+                    {{ form_2.hidden_tag() }}
+                    {{ form_2.csrf_token() }}
+                    <div class="form-group">
+                        {{ form_2.min.label(class='sr-only') }}
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Neues Zufallswort mit</div>
+                            </div>
+                        {{ form_2.min(size=1, min=min, max=max, class='form-control', value=min) }}
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">bis</div>
+                            </div>
+                            {{ form_2.max(size=1, min=min, max=max, class='form-control', value=max) }}
+                            <div class="input-group-append">
+                                <div class="input-group-text">Buchstaben</div>
+                            </div>
+                        </div>
+                        {{ form_2.submit(class='btn btn-primary mb-2') }}
+                    </div>
+                </form>
+            </div>
     {#    <div class="row justify-content-center">#}
     {#        <div>#}
     {#        <div class="col-2">#}
     {#            <a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary">Neue Übung!</a>#}
     {#        </div>#}
     {#    </div>#}
+        </div>
     </div>
 {% endblock %}
