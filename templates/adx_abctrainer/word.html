@@ -39,10 +39,10 @@
                         {{ form_2.min.label(class='sr-only') }}
                         <div class="adx-input-group mb-2 mr-sm-2">
                                     <span>Neues Zufallswort mit</span>
-                                    {{ form_2.min(size=1, min=min, max=max, class='form-control', value=min) }}
+                                    {{ form_2.min(size=1, min=min, max=max, class='form-control', value=min_abs) }}
                                     {{ form_2.max.label(class='sr-only') }}
                                     <span>bis</span>
-                                    {{ form_2.max(size=1, min=min, max=max, class='form-control', value=max) }}
+                                    {{ form_2.max(size=1, min=min, max=max, class='form-control', value=max_abs) }}
                                     <span>Buchstaben.</span>
                             </div>
                         {{ form_2.submit(class='btn btn-primary mb-2') }}
