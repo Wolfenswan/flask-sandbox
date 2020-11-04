@@ -33,8 +33,6 @@
             </div>
             <div class="row adx-word-row">
                 <form action="" method="post" novalidate class="form-inline">
-                    {{ form_2.hidden_tag() }}
-                    {{ form_2.csrf_token() }}
                     <div class="form-group">
                         {{ form_2.min.label(class='sr-only') }}
                         <div class="adx-input-group mb-2 mr-sm-2">
@@ -46,6 +44,7 @@
                                     <span>Buchstaben.</span>
                             </div>
                         {{ form_2.submit(class='btn btn-primary mb-2') }}
+                        {{ form_2.csrf_token }}
                     </div>
                 </form>
                 {% if form_2.errors %}

@@ -45,6 +45,7 @@
                             {{ form.legacy_dl }} {{ form.legacy_dl.description }}
                         </div>
                         <p>{{ form.submit(class='btn btn-primary') }}</p>
+                        {{ form.csrf_token }}
                 </form>
             </div>
             <div class="col-5">

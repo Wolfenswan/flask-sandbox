@@ -20,7 +20,6 @@ def abctrainer_form():
     if form.validate_on_submit() and form.submit.data:
         return redirect(url_for('.abctrainer_word', word = form.word.data))
     elif form_2.validate_on_submit() and form_2.submit.data:
-        #return redirect('/adx_abctrainer/random',min=3,max=22)
         return redirect(url_for('.abctrainer_random', min=form_2.min.data,max=form_2.max.data))
     return render_template("adx_abctrainer/form.html", form=form, form_2 = form_2, word_list = WORDS_PRESELECTED, min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX)
 
@@ -61,10 +60,13 @@ def abctrainer_new():
 
     if form.validate_on_submit():
         new_word = form.word.data
+        flash(f'Verarbeite {new_word}')
 
         # add new word or delete if already contained in lists
         WORDS_PRESELECTED.append(new_word) if not new_word in WORDS_PRESELECTED else WORDS_PRESELECTED.remove(new_word)
         WORDS_RANDOM.append(new_word) if not new_word in WORDS_RANDOM else WORDS_RANDOM.remove(new_word)
+
+        flash(f'Liste: {WORDS_PRESELECTED}')
 
         # overwrite txt with pre-selected files according to new list
         with open(Path(f'{INSTANCE_PATH}/woerter_vorauswahl.txt'), 'w') as f:
