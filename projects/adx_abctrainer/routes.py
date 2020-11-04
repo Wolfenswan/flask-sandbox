@@ -18,10 +18,10 @@ def abctrainer_form():
     form = InputForm()
     form_2 = RandomForm()
     if form.validate_on_submit() and form.submit.data:
-        return redirect(f'/adx_abctrainer/{form.word.data}')
+        return redirect(url_for('.abctrainer_word', word = form.word.data))
     elif form_2.validate_on_submit() and form_2.submit.data:
         #return redirect('/adx_abctrainer/random',min=3,max=22)
-        return redirect(f'/adx_abctrainer/random?min={form_2.min.data}&max={form_2.max.data}')
+        return redirect(url_for('.abctrainer_random', min=form_2.min.data,max=form_2.max.data))
     return render_template("adx_abctrainer/form.html", form=form, form_2 = form_2, word_list = WORDS_PRESELECTED, min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX)
 
 @adx_abctrainer_bp.route('/adx_abctrainer/<word>', methods=["GET", "POST"])
