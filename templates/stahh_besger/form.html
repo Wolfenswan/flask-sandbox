@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-5">
                 <h1>Staatsarchiv Hamburg Bestellschein Generator</h1>
-                <form action="" method="post" novalidate>
+                <form action="" method="post">
                         {{ form.hidden_tag() }}
                         <div class="form-group">
                             {{ form.name.label }}<br>
@@ -32,15 +32,7 @@
                                 <div class=".alert-danger">[{{ error }}]</div>
                             {% endfor %}
                         </div>
-            {#            <div class="form-group">#}
-            {#                {{ form.urls.label }} - Eine URL pro Zeile<br>#}
-            {#                {{ form.urls(rows='10',cols='30') }}#}
-            {#                {% for error in form.urls.errors %}#}
-            {#                    <div class=".alert-danger">[{{ error }}]</div>#}
-            {#                {% endfor %}#}
-            {#            </div>#}
                         <div class="form-group">
-        {#                  {{ form.zip_file }} {{ form.zip_file.description }}#}
                             {{ form.delete_after_dl }} {{ form.delete_after_dl.description }}<br/>
                             {{ form.legacy_dl }} {{ form.legacy_dl.description }}
                         </div>
