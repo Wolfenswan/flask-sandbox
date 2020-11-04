@@ -32,7 +32,7 @@ def abctrainer_word(word):
     max_length = int(request.args.get('max', WORD_LENGTH_MAX))
 
     if form_2.validate_on_submit() and form_2.submit.data:
-        return redirect(f'/adx_abctrainer/random?min={form_2.min.data}&max={form_2.max.data}')
+        return redirect(url_for('.abctrainer_random', min=form_2.min.data,max=form_2.max.data))
 
     if word.isalpha() and len(word) >= WORD_LENGTH_MIN and len(word) <= WORD_LENGTH_MAX:
         word = parse_word(word)
@@ -52,7 +52,6 @@ def abctrainer_random():
         word = max(WORDS_RANDOM, key=len)
 
     if word != '':
-        #return redirect(f'/adx_abctrainer/{word}?min={min_length}&max={max_length}')
         return redirect(url_for('.abctrainer_word', word = word, min=min_length, max=max_length))
     return redirect('/adx_abctrainer/')
 
