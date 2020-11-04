@@ -15,8 +15,8 @@ class InputForm(FlaskForm):
             raise ValidationError("Nur Buchstaben von A-Z erlaubt!")
 
 class RandomForm(FlaskForm):
-    min = DecimalField('Von:', places=1,validators=[NumberRange(min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX-1, message=f'Mindestens zwischen {WORD_LENGTH_MIN} und {WORD_LENGTH_MAX-1} Buchstaben.')])
-    max = DecimalField('Bis:', places=1,validators=[NumberRange(min=WORD_LENGTH_MIN+1, max=WORD_LENGTH_MAX, message=f'Höchstens zwischen {WORD_LENGTH_MIN+1} und {WORD_LENGTH_MAX} Buchstaben.')])
+    min = DecimalField('Von:', places=1,validators=[NumberRange(min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX, message=f'Mindestens zwischen {WORD_LENGTH_MIN} und {WORD_LENGTH_MAX-1} Buchstaben.')])
+    max = DecimalField('Bis:', places=1,validators=[NumberRange(min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX, message=f'Höchstens zwischen {WORD_LENGTH_MIN+1} und {WORD_LENGTH_MAX} Buchstaben.')])
     submit = SubmitField('Los!')
 
 class AddWordForm(FlaskForm):

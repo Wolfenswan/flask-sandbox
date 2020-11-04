@@ -34,9 +34,11 @@
                       {% for error in form.word.errors %}
                           <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
                       {% endfor %}
-                        {% for error in form.pwd.errors %}
-                          <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
-                      {% endfor %}
+                        {% if form.pwd %}
+                            {% for error in form.pwd.errors %}
+                              <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
+                          {% endfor %}
+                        {% endif %}
                 {% endif %}
                 <div class="alert alert-primary">
                     <small><i class="fas fa-info"></i> Worte sollten zwischen {{ min }} und {{ max }} Buchstaben haben. Sonderzeichen und Umlaute dürfen nicht vorkommen.</small>
@@ -60,10 +62,10 @@
                             </div>
                     </form>
                     {% if form_2.errors %}
-                        {% for error in form_2.max.errors %}
+                        {% for error in form_2.min.errors %}
                             <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
                         {% endfor %}
-                        {% for error in form_2.min.errors %}
+                        {% for error in form_2.max.errors %}
                             <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
                         {% endfor %}
                     {% endif %}
