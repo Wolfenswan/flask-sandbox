@@ -37,10 +37,10 @@
                         {{ form_2.min.label(class='sr-only') }}
                         <div class="adx-input-group mb-2 mr-sm-2">
                                     <span>Neues Zufallswort mit</span>
-                                    {{ form_2.min(size=1, min=min, max=max, class='form-control', value=min_abs) }}
+                                    {{ form_2.min(min=min, max=max, class='form-control adx-form-int', value=min_abs) }}
                                     {{ form_2.max.label(class='sr-only') }}
                                     <span>bis</span>
-                                    {{ form_2.max(size=1, min=min, max=max, class='form-control', value=max_abs) }}
+                                    {{ form_2.max(min=min, max=max, class='form-control adx-form-int', value=max_abs) }}
                                     <span>Buchstaben.</span>
                             </div>
                         {{ form_2.submit_random(class='btn btn-primary mb-2') }}
