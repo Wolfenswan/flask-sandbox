@@ -4,7 +4,7 @@ from pathlib import Path
 from flask import Blueprint, render_template, redirect, url_for, request, Flask, flash
 
 from projects.adx_abctrainer.adx_abctrainer import parse_word, WORDS_RANDOM, WORDS_PRESELECTED, WORD_LENGTH_MIN, \
-    WORD_LENGTH_MAX
+    WORD_LENGTH_MAX, INSTANCE_PATH
 from projects.adx_abctrainer.form import InputForm, RandomForm, AddWordForm
 
 adx_abctrainer_bp = Blueprint('adx_abctrainer', __name__, template_folder='templates/adx_abctrainer/')
@@ -60,10 +60,17 @@ def abctrainer_new():
     form = AddWordForm()
 
     if form.validate_on_submit():
-        with open(Path(f'{Flask(__name__).root_path}/static/woerter_vorauswahl.txt'), 'a') as f:
-            WORDS_PRESELECTED.append(form.word.data)
-            WORDS_RANDOM.append(form.word.data)
-            f.write(f'\n{form.word.data}')
+        new_word = form.word.data
+
+        # add new word or delete if already contained in lists
+        WORDS_PRESELECTED.append(new_word) if not new_word in WORDS_PRESELECTED else WORDS_PRESELECTED.remove(new_word)
+        WORDS_RANDOM.append(new_word) if not new_word in WORDS_RANDOM else WORDS_RANDOM.remove(new_word)
+
+        # overwrite txt with pre-selected files according to new list
+        with open(Path(f'{INSTANCE_PATH}/woerter_vorauswahl.txt'), 'w') as f:
+            for word in WORDS_PRESELECTED:
+                f.write(f'{word}\n')
+
         return redirect('/adx_abctrainer/neues_wort')
 
     return render_template("adx_abctrainer/form.html", form=form, form_2=None, word_list=WORDS_PRESELECTED, min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX)

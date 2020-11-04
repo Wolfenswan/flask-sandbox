@@ -1,5 +1,5 @@
 """
-default config, used as fallback if /instance/config.py is found
+default config, used as fallback if /instance/config.py is missing
 """
 
 import os
