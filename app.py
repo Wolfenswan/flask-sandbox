@@ -2,17 +2,13 @@ from pathlib import Path
 
 from flask import Flask, render_template
 
-try:
-    from instance.config import Config
-except ModuleNotFoundError:
-    from def_config import Config
-
 from projects.adx_abctrainer.routes import adx_abctrainer_bp
 from projects.stahh_besger import stahh_besger
 from projects.stahh_besger.routes import stahh_besger_bp
 
-app = Flask(__name__, instance_path='/instance')
-app.config.from_object(Config)
+app = Flask(__name__, instance_relative_config=True)
+app.config.from_object('config')
+app.config.from_pyfile('config.py')
 app.register_blueprint(stahh_besger_bp)
 app.register_blueprint(adx_abctrainer_bp)
 

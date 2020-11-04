@@ -5,5 +5,4 @@ default config, used as fallback if /instance/config.py is found
 import os
 import secrets
 
-class Config(object):
-    SECRET_KEY = os.environ.get('SECRET_KEY') or secrets.token_urlsafe(16)
+SECRET_KEY = os.environ.get('SECRET_KEY') or secrets.token_urlsafe(16)

@@ -1,10 +1,11 @@
 import random
+from pathlib import Path
 
-from flask import Blueprint, render_template, redirect, url_for, request
+from flask import Blueprint, render_template, redirect, url_for, request, Flask, flash
 
 from projects.adx_abctrainer.adx_abctrainer import parse_word, WORDS_RANDOM, WORDS_PRESELECTED, WORD_LENGTH_MIN, \
     WORD_LENGTH_MAX
-from projects.adx_abctrainer.form import InputForm, RandomForm
+from projects.adx_abctrainer.form import InputForm, RandomForm, AddWordForm
 
 adx_abctrainer_bp = Blueprint('adx_abctrainer', __name__, template_folder='templates/adx_abctrainer/')
 
@@ -53,3 +54,16 @@ def abctrainer_random():
     if word != '':
         return redirect(f'/adx_abctrainer/{word}?min={min_length}&max={max_length}')
     return redirect('/adx_abctrainer/')
+
+@adx_abctrainer_bp.route('/adx_abctrainer/neues_wort', methods=["GET", "POST"])
+def abctrainer_new():
+    form = AddWordForm()
+
+    if form.validate_on_submit():
+        with open(Path(f'{Flask(__name__).root_path}/static/woerter_vorauswahl.txt'), 'a') as f:
+            WORDS_PRESELECTED.append(form.word.data)
+            WORDS_RANDOM.append(form.word.data)
+            f.write(f'\n{form.word.data}')
+        return redirect('/adx_abctrainer/neues_wort')
+
+    return render_template("adx_abctrainer/form.html", form=form, form_2=None, word_list=WORDS_PRESELECTED, min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX)

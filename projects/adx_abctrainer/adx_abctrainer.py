@@ -6,15 +6,26 @@ from pathlib import Path
 from flask import url_for, Flask
 from markupsafe import Markup
 
+# TODO would be much better solved from within a Class, but then again... it does what it is supposed to do.
+STATIC_PATH = Path(f'{Flask(__name__).root_path}/static/')
 WORD_LENGTH_MIN = 3
 WORD_LENGTH_MAX = 18
+WORDS_PRESELECTED = []
+WORDS_RANDOM = []
+ABCTRAINER_PWD = ''
 
-with open(Path(f'{Flask(__name__).root_path}/static/woerter_vorauswahl.txt'), 'r') as f:
+with open(Path(f'{STATIC_PATH}/woerter_vorauswahl.txt'), 'r') as f:
     WORDS_PRESELECTED = f.read().split()
 
-with open(Path(f'{Flask(__name__).root_path}/static/woerter_zufall.txt'), 'r') as f:
+with open(Path(f'{STATIC_PATH}/woerter_zufall.txt'), 'r') as f:
     WORDS_RANDOM = f.read().split()
     WORDS_RANDOM.append(WORDS_PRESELECTED)
+
+try: # todo exception message if pwd-file does not exist
+    with open(Path(f'{STATIC_PATH}/pwd'), 'r') as f:
+        ABCTRAINER_PWD = f.read()
+except:
+    pass
 
 def parse_word_to_html(word):
     """ OBSOLETE Turns the given word into a list of img & div tags for the jinja-template """
