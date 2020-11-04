@@ -7,7 +7,7 @@ from projects.adx_abctrainer.adx_abctrainer import WORD_LENGTH_MAX, WORD_LENGTH_
 
 class InputForm(FlaskForm):
     word = StringField('Wort', validators=[DataRequired(message='Gib was ein!'),Length(max=WORD_LENGTH_MAX, message=f'Maximal {WORD_LENGTH_MAX} Buchstaben!')])
-    submit = SubmitField('Spuck was aus!')
+    submit_word = SubmitField('Spuck was aus!')
 
     def validate_word(form, field):
         illegal_characters = ['ß','ä','ö','ü']
@@ -17,12 +17,12 @@ class InputForm(FlaskForm):
 class RandomForm(FlaskForm):
     min = DecimalField('Von:', places=1,validators=[NumberRange(min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX, message=f'Mindestens zwischen {WORD_LENGTH_MIN} und {WORD_LENGTH_MAX-1} Buchstaben.')])
     max = DecimalField('Bis:', places=1,validators=[NumberRange(min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX, message=f'Höchstens zwischen {WORD_LENGTH_MIN+1} und {WORD_LENGTH_MAX} Buchstaben.')])
-    submit = SubmitField('Los!')
+    submit_random = SubmitField('Los!')
 
 class AddWordForm(FlaskForm):
     word = StringField('Wort', validators=[DataRequired(message='Gib was ein!'),Length(max=WORD_LENGTH_MAX, message=f'Maximal {WORD_LENGTH_MAX} Buchstaben!')])
     pwd = PasswordField(f'Passwort', validators=[DataRequired(message='Passwort eingeben!')])
-    submit = SubmitField(f'Ab!')
+    submit_word = SubmitField(f'Ab!')
 
     def validate_word(form, field):
         illegal_characters = ['ß','ä','ö','ü']

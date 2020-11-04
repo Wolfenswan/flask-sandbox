@@ -17,9 +17,9 @@ def abctrainer_subdomain():
 def abctrainer_form():
     form = InputForm()
     form_2 = RandomForm()
-    if form.validate_on_submit() and form.submit.data:
+    if form.validate_on_submit() and form.submit_word:
         return redirect(url_for('.abctrainer_word', word = form.word.data))
-    elif form_2.validate_on_submit() and form_2.submit.data:
+    elif form_2.validate_on_submit() and form_2.submit_random:
         return redirect(url_for('.abctrainer_random', min=form_2.min.data,max=form_2.max.data))
     return render_template("adx_abctrainer/form.html", form=form, form_2 = form_2, word_list = WORDS_PRESELECTED, min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX)
 
@@ -30,7 +30,7 @@ def abctrainer_word(word):
     min_length = int(request.args.get('min', WORD_LENGTH_MIN))
     max_length = int(request.args.get('max', WORD_LENGTH_MAX))
 
-    if form_2.validate_on_submit() and form_2.submit.data:
+    if form_2.validate_on_submit():
         return redirect(url_for('.abctrainer_random', min=form_2.min.data,max=form_2.max.data))
 
     if word.isalpha() and len(word) >= WORD_LENGTH_MIN and len(word) <= WORD_LENGTH_MAX:
