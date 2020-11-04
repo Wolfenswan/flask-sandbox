@@ -29,14 +29,14 @@ def abctrainer_word(word):
 
     form_2 = RandomForm()
     min_length = int(request.args.get('min', WORD_LENGTH_MIN))
-    min_length = int(request.args.get('max', WORD_LENGTH_MAX))
+    max_length = int(request.args.get('max', WORD_LENGTH_MAX))
 
     if form_2.validate_on_submit() and form_2.submit.data:
         return redirect(f'/adx_abctrainer/random?min={form_2.min.data}&max={form_2.max.data}')
 
     if word.isalpha() and len(word) >= WORD_LENGTH_MIN and len(word) <= WORD_LENGTH_MAX:
         word = parse_word(word)
-        return render_template('adx_abctrainer/word.html', word=word, form_2 = form_2, randomize=False, min=min_length, max=min_length, min_abs=WORD_LENGTH_MIN, max_abs = WORD_LENGTH_MAX)
+        return render_template('adx_abctrainer/word.html', word=word, form_2 = form_2, randomize=False, min=min_length, max=max_length, min_abs=WORD_LENGTH_MIN, max_abs = WORD_LENGTH_MAX)
     else:
         return redirect('/adx_abctrainer/')
 
@@ -52,7 +52,8 @@ def abctrainer_random():
         word = max(WORDS_RANDOM, key=len)
 
     if word != '':
-        return redirect(f'/adx_abctrainer/{word}?min={min_length}&max={max_length}')
+        #return redirect(f'/adx_abctrainer/{word}?min={min_length}&max={max_length}')
+        return redirect(url_for('.abctrainer_word', word = word, min=min_length, max=max_length))
     return redirect('/adx_abctrainer/')
 
 @adx_abctrainer_bp.route('/adx_abctrainer/neues_wort', methods=["GET", "POST"])
