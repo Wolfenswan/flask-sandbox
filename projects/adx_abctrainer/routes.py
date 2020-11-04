@@ -77,6 +77,6 @@ def abctrainer_new():
             for word in WORDS_PRESELECTED:
                 f.write(f'{word}\n')
 
-        return redirect('/adx_abctrainer/neues_wort')
+        #return redirect(url_for('.adx_abctrainer_new'))
 
     return render_template("adx_abctrainer/form.html", form=form, form_2=None, word_list=WORDS_PRESELECTED, min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX)
