@@ -16,3 +16,4 @@ venv_win/
 .htaccess
 flask.wsgi
 /projects/adx_abctrainer/instance/
+/logs/
