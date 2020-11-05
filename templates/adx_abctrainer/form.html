@@ -84,6 +84,13 @@
                         {% endfor %}
                     </div>
                 </div>
+
+                <div class="row">
+                    {% for letter in 'abcdefghijklmnopqrstuvwxyz' %}
+                        {% set letter_path = url_for('static', filename='adx_abctrainer/img/abc/'+letter+'.png') %}
+                        <img src="{{ letter_path }}" class="adx-background">
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

@@ -66,3 +66,7 @@ div .list-group a:hover{
   text-align: center;
   padding: .375rem .75rem
 }
+
+.adx-background {
+    display:none;
+}
