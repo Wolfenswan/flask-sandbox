@@ -29,7 +29,7 @@
                             {{ form.csrf_token }}
                         </div>
                     </form>
-                {% if form.errors %}
+                {% if form.errors and submitted['word'] %} {# and check makes sure errors are only shown if the corresponding form was submitted #}
                       {% for error in form.word.errors %}
                           <div class="alert alert-danger"><strong><i class="fas fa-bomb"></i> {{ error }}</strong></div>
                       {% endfor %}

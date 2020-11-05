@@ -17,15 +17,16 @@ def abctrainer_subdomain():
 def abctrainer_form():
     form = InputForm()
     form_2 = RandomForm()
+    submitted = {'word': form.data['submit_word'], 'random': form_2.data['submit_random']} # discern which form was submitted
 
-    if form.validate_on_submit() and form.submit_word:
-        return redirect(url_for('.abctrainer_word', word = form.word.data))
-    elif form_2.validate_on_submit() and form_2.submit_random:
-        return redirect(url_for('.abctrainer_random', min=form_2.min.data,max=form_2.max.data))
-    elif form.validate_on_submit() and form.submit_word or form_2.validate_on_submit() and form_2.submit_random:
+    if form.validate_on_submit() and submitted['word']:
+        return redirect(url_for('.abctrainer_word', word=form.word.data))
+    elif form_2.validate_on_submit() and submitted['random']:
+        return redirect(url_for('.abctrainer_random', min=form_2.min.data, max=form_2.max.data))
+    elif form.validate_on_submit() and submitted['word'] or form_2.validate_on_submit() and submitted['random']:
         flash("You should not see this")
 
-    return render_template("adx_abctrainer/form.html", form=form, form_2 = form_2, word_list = WORDS_PRESELECTED, min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX)
+    return render_template("adx_abctrainer/form.html", form=form, form_2 = form_2, submitted = submitted, word_list = WORDS_PRESELECTED, min=WORD_LENGTH_MIN, max=WORD_LENGTH_MAX)
 
 @adx_abctrainer_bp.route('/adx_abctrainer/<word>', methods=["GET", "POST"])
 def abctrainer_word(word):
