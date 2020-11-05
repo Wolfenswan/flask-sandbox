@@ -69,4 +69,6 @@ div .list-group a:hover{
 
 .adx-background {
     display:none;
+    height: 0;
+    width: 0;
 }
