@@ -1,4 +1,4 @@
-A very simple flask-based site to provide easy access to my python-based applets.
+A very simple flask-based site to provide easy access to my python-based applets, before (or instead) of deploying them as standalones. 
 
 Currently contains:
 - Audax ABC-Trainer: Generates workouts from user-input(strings) or randomized selection, providing an exercise for each letter. Images were provided by my gym during the corona lockdowns.
