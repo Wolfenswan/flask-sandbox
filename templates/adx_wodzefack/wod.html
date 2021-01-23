@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+    AUDAX - ABC Trainings Generator
+{% endblock %}
+
+{% block custom_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='adx_wodzefack/style.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="adx-logo-row adx-row row">
+            <div class="col-4"><img height="70px" src="{{ url_for('static',filename='adx_abctrainer/img/logos/adx_vscorona.png') }}"></div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <p>Bla bla wichtige Hinweise</p>
+                <p><span class="adx-bold">{{ today }}</span></p>
+                <p>
+                    {{ workout.belastung }}s Belastung<br/>
+                    {{ workout.pause }}s Pause<br/>
+                    A) {{ workout.exc1 }}<br/>
+                    B) {{ workout.exc2 }}<br/>
+                    C) {{ workout.exc3 }}<br/>
+                    Video: {{ workout.video_url() }}<br/>
+                    {% if workout.online_training != '' %}
+                        <span class="adx-bold">{{ workout.online_training }} Online-Training!</span><br/>
+                    {% endif %}
+                </p>
+                <p>
+                    <span class="adx-bold">Härtegrade</span><br/>
+                    <span class="adx-bold">Wiedereinstieg</span>: 2 Durchgänge, nach jedem Durchgang 1 min Pause<br/>
+                </p>
+                <p><a href="{{ url_for('adx_abctrainer.abctrainer_form') }}" class="btn btn-primary adx-button"><strong>Zurück zum ABC-Trainer!</strong></a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
