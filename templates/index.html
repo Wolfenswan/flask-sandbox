@@ -6,32 +6,11 @@
             <h3>Markus Bassermann</h3>
             <div>Historian | Developer | Professional Dabbling.</div>
             <p><b>This is not a homepage. Yet.</b></p>
-            <h5>TL DR</h5>
-            <ul>
-            <li><b>M.A. History</b> (1,0) and <b>B.A. Sociology</b> (1,6) from University of Hamburg.<br/>
-            <small>Core areas: European Integration | Worker movements (focus: cooperatives) | Germany in the 19th and 20th century (focus: housing policy and conditions).</small></li>
-            <li>Editor and Web-Development at <a href="https://hamburgische-geschichten.de/" target="_blank">Hamburgische-Geschichten.de</a>.<br/>
-            <small>This project was promoted by the University College of the University of Hamburg within the framework of the Excellence Strategy of the German federal and state governments (2021).</small></li>
-            <li>Experienced in <b>Python</b> (+Django, Flask), <b>C#</b> (+Unity) and <b>Git</b>. Bit of <b>Javascript</b> on the side.</li>
-            <li>Proven seminar facilitator and host through over 10 years of volunteer education work.</li>
-            </ul>
-            <h5>Coding Projects</h5>
-            <ul>
-                <li><a href="{{url_for ('adx_abctrainer.abctrainer_form') }}">ABC Trainer</a> for Audax-SV (my martial arts gym).<br/>
-                <small>Created during the 2020 lockdown to provide easy stay-at-home workouts. Currently hosted independently and with minor updates at audax-abc.de</small></li>
-                <li><a href="https://github.com/ferstaberinde/F3" target="_blank">F3 Framework for ARMA3</a><br/><small>A venerable but superseded mission-making-framework for ARMA3. Saw thousands of users during its peak. I co-produced & contributed under the moniker 'Wolfenswan'.</small></li>
-                                      <li><a target="_blank" href="https://geschichten.github.io/bille/">Bille Geschichten</a> (Javascript support)<br/><small>A mapping project for an Urban Design project in south-eastern Hamburg.</small></li>
-          
-                                <li><a href="{{url_for ('stahh_besger.stahh_besger_form') }}">Staatsarchiv Hamburg</a> order-file generator<br/>
-                <small>The app was created to migitate the overly cumbersone ordering process and has been used by myself and colleagues at the <a target="_blank" href="https://historikergenossenschaft.de/">Historiker Genossenschaft.</small></a></li>
-                                <li><a href="https://github.com/Wolfenswan/RoguelikeTut-TCOD" target="_blank">Unnamed roguelike</a><br/><small>My 'forever project', written in Python. While it is a working game, I mostly use to continuely hone my Python skills and test out new concepts.</small></li>
+            
+            {% include "landingpage/shortinfo.html" %}
+            {% include "landingpage/projects.html" %}
+            {% include "landingpage/contact.html" %}
 
-                <li><a href="{{url_for ('adx_wodzefack.wod') }}">Wodzefack?</a>(Workout of the day) for Audax-SV<br><small>Proof-of-concept. Provided a daily workout from 23.01.2021 to 14.02.2021. Never put into production.</small></li>
-            </ul>
-            <h5>Contact & Other</h5>
-            <a href="mailto:&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x6b;&#x6f;&#x6e;&#x74;&#x61;&#x6b;&#x74;&#x40;&#x6d;&#x61;&#x62;&#x61;&#x73;&#x73;&#x2e;&#x64;&#x65;">&#x6b;&#x6f;&#x6e;&#x74;&#x61;&#x6b;&#x74;&#x40;&#x6d;&#x61;&#x62;&#x61;&#x73;&#x73;&#x2e;&#x64;&#x65;</a><br/>
-            <a href="https://wolfenswan.itch.io/"  target="_blank">Itch.io</a><br/>
-            <a href="https://github.com/Wolfenswan/" target="_blank">Github</a>
         </div>
     </div>
 {% endblock %}
