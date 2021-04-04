@@ -1,0 +1,22 @@
+{% block projects %}
+<h5>Coding Projects</h5>
+    <ul>
+        <li><a href="{{url_for ('adx_abctrainer.abctrainer_form') }}">ABC Trainer</a> for Audax-SV (my martial arts gym).<br/>
+        <small>Created during the 2020 lockdown to provide easy stay-at-home workouts. Currently hosted independently and with minor updates at audax-abc.de</small></li>
+        
+        <li><a href="https://github.com/ferstaberinde/F3" target="_blank">F3 Framework for ARMA3</a><br/>
+        <small>A venerable but superseded mission-making-framework for the video-game ARMA3. Saw thousands of users during its peak. I co-produced & contributed under the moniker 'Wolfenswan'.</small></li>
+        
+        <li><a target="_blank" href="https://geschichten.github.io/bille/">Bille Geschichten</a> (Javascript support)<br/>
+        <small>A mapping project for an Urban Design project in south-eastern Hamburg.</small></li>
+
+        <li><a href="{{url_for ('stahh_besger.stahh_besger_form') }}">Staatsarchiv Hamburg</a> order-file generator<br/>
+        <small>The app was created to migitate the overly cumbersone ordering process and has been used by myself and colleagues at the <a target="_blank" href="https://historikergenossenschaft.de/">Historiker Genossenschaft.</small></a></li>
+        
+        <li><a href="https://github.com/Wolfenswan/RoguelikeTut-TCOD" target="_blank">Unnamed roguelike</a><br/>
+        <small>My 'forever project', written in Python. While it is a working game, I mostly use to continuely hone my Python skills and test out new concepts.</small></li>
+
+        <li><a href="{{url_for ('adx_wodzefack.wod') }}">Wodzefack?</a>(Workout of the day) for Audax-SV<br>
+        <small>Proof-of-concept. Provided a daily workout from 23.01.2021 to 14.02.2021. Never put into production.</small></li>
+    </ul>
+{% endblock %}
