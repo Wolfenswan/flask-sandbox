@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block custom_css %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='adx_wodzefack/style.css') }}">
+{% endblock %}
+
+
 {% block content %}
     <div class="container">
         <div class="col-md">
