@@ -4,6 +4,12 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='adx_wodzefack/style.css') }}">
 {% endblock %}
 
+{% block title %}
+    Markus Bassermann
+{% endblock %}
+
+{% comment %} TODO: Add page title {% endcomment %}
+{% comment %} TODO: Add space to lower part {% endcomment %}
 
 {% block content %}
     <div class="container">
@@ -15,7 +21,6 @@
             {% include "landingpage/shortinfo.html" %}
             {% include "landingpage/projects.html" %}
             {% include "landingpage/contact.html" %}
-
         </div>
     </div>
 {% endblock %}
