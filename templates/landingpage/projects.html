@@ -1,97 +1,28 @@
 {% block projects %}
-<div class="accordion" id="accordionProjects">
-<div class="row">
-<div class="col-md-8">
-    <div class="card">
-        <div class="card-header" id="headingOProjects">
-            <h2 class="mb-0">
-                <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    Ongoing Projects
-                </button>
-            </h2>
-            <small>What I am currently participating in or working on.</small>
+    <div class="accordion" id="accordionProjects">
+    <div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            {% include "landingpage/projects/current.html" %}
         </div>
-        <div class="collapse show" id="collapseTwo" aria-labelledby="headingOProjects" data-parent="#accordionProjects">
-            <div class="card-body">
-                
-                <ul>
-                    <li>Contributor to <a href="https://www.stiftung-digitale-spielekultur.de/games-erinnerungskultur/">"Erinnern mit Games"</a> database<br/>
-                    <small>Growing database (articles & videos) of games related to culture of remembrance.</small></li>
+        </div>
+    </div>
+    </div>
 
-                    <li>Editor and Web-Development at <a href="https://hamburgische-geschichten.de/" target="_blank">Hamburgische-Geschichten.de</a>.<br/>
-                    <small>This project was promoted by the University College of the University of Hamburg within the framework of the Excellence Strategy of the German federal and state governments (2021).</small></li>
+    <div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            {% include "landingpage/projects/interesting.html" %}
+        </div>
+    </div>
+    </div>
 
-                    <li><a href="https://github.com/Wolfenswan/Digital-Humanities-Link-Repository">Digital Humanities Link Repositry</a><br/>
-                    <small>Inspired by awesome lists, a growing selection of websites related to the Digital Humanities.</small></li>
-
-                    <li>I sometimes publish games on <a href="https://wolfenswan.itch.io/" target="_blank">Itch.io</a>.</li>
-                </ul>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+            {% include "landingpage/projects/old.html" %}
             </div>
         </div>
     </div>
-    </div>
-</div>
-</div>
-
-<div class="row">
-<div class="col-md-8">
-    <div class="card">
-        <div class="card-header" id="headingIProjects">
-            <h2 class="mb-0">
-                <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Interesting projects
-                </button>
-            </h5>
-            <small>Finished things that I like or are otherwise worthy of note.</small>
-        </div>
-        <div class="collapse" id="collapseOne" aria-labelledby="headingIProjects" data-parent="#accordionProjects">
-            <div class="card-body">
-                <ul>
-                <li><a href="https://wolfenswan.itch.io/carta-marina" target="_blank">C_rta M_rina</a><br>
-                    <small>Hidden-picture game based on Olauf Magnus' map by the same name. Initial version was made in 48h during Game Jam Hanse in March 2021.</small></li>
-
-                <li><a href="{{url_for ('adx_abctrainer.abctrainer_form') }}">ABC Trainer</a> for Audax-SV (my martial arts gym).<br/>
-                    <small>Created during the 2020 lockdown to provide easy stay-at-home workouts. Currently hosted independently and with minor updates at audax-abc.de</small></li>
-
-                <li><a href="{{url_for ('stahh_besger.stahh_besger_form') }}">Staatsarchiv Hamburg</a> order-file generator<br/>
-                    <small>The app was created to migitate the overly cumbersone ordering process and has been used by myself and colleagues at the <a target="_blank" href="https://historikergenossenschaft.de/">Historiker Genossenschaft.</small></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
-<div class="row">
-<div class="col-md-8">
-    <div class="card">
-        <div class="card-header" id="headingFProjects">
-            <h2 class="mb-0">
-                <button class="btn btn-light" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
-                    Older Projects and Proof-of-concepts
-                </button>
-            </h2>
-            <small>Projects that are either several years old or never went into production.</small>
-        </div>
-        <div class="collapse" id="collapseThree" aria-labelledby="headingFProjects" data-parent="#accordionProjects">
-            <div class="card-body">
-                <ul>
-                    <li><a target="_blank" href="https://geschichten.github.io/bille/">Bille Geschichten</a> (Javascript support)<br/>
-                        <small>A mapping project for an Urban Design project in south-eastern Hamburg.</small></li>
-
-                    <li><a href="https://github.com/ferstaberinde/F3" target="_blank">F3 Framework for ARMA3</a><br/>
-                        <small>A venerable but superseded mission-making-framework for the video-game ARMA3. Saw thousands of users during its peak. I co-produced & contributed under the moniker 'Wolfenswan'.</small></li>
-                    
-                    <li><a href="https://github.com/Wolfenswan/RoguelikeTut-TCOD" target="_blank">Unnamed roguelike</a><br/>
-                        <small>My 'forever project', written in Python. While it is a working game, I mostly use it to continuely hone my Python skills and test out new concepts.</small></li>
-                
-                    <li><a href="{{url_for ('adx_wodzefack.wod') }}">Wodzefack?</a>(Workout of the day) for Audax-SV<br>
-                    <small>Proof-of-concept. Provided a daily workout from 23.01.2021 to 14.02.2021. Never put into production.</small></li>
-                </ul>  
-            </div>
-        </div>
-      </div>
-    </div>
-</div>
     <p></p>
 {% endblock %}
