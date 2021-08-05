@@ -10,14 +10,18 @@
 
 {% block content %}
     <div class="container">
-        <div class="col-md">
+        <div class="row">
             <h3>Hi! I'm Markus.</h3>
-            <div>Historian | Developer | Professional Dabbling.</div>
-            <p><b>Is this a homepage if it lacks <span style="color:rgba(241, 0, 0, 0.945)";>design</span>?</b></p>
-            
+        </div>
+        <div class="row">
+            <p>
+            Historian | Developer | Professional Dabbling.<br/>
+            <b>Is this a homepage if it lacks <span style="color:rgba(241, 0, 0, 0.945)";>design</span>?</b>
+            </p>
+        </div>
             {% include "landingpage/shortinfo.html" %}
             {% include "landingpage/projects.html" %}
             {% include "landingpage/contact.html" %}
-        </div>
+
     </div>
 {% endblock %}
